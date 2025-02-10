@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import React from 'react'
 import styles from './navbar.module.css'
+import Darkmode from '../../app/darkmode/Darkmode';
 
 export default function NavBar() {
 
@@ -14,11 +15,6 @@ export default function NavBar() {
           id: 2,
           title: "Portfolio",
           url: "/portfolio",
-        },
-        {
-          id: 3,
-          title: "Blog",
-          url: "/blog",
         },
         {
           id: 4,
@@ -42,9 +38,11 @@ export default function NavBar() {
     <Link href="/" className={styles.logo}>
      QuillCraft
     </Link>
+    
     <div className={styles.links}>
-
+    <Darkmode />
       {links.map((link) => (
+        
         <Link key={link.id} href={link.url} className={styles.link}>
           {link.title}
         </Link>
