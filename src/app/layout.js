@@ -4,6 +4,7 @@ import Footer from '@/Components/footer/Footer'
 import NavBar from "@/Components/navbar/NavBar";
 import ThemeProvider from "./context/ThemeContext";
 import toast, { Toaster } from 'react-hot-toast';
+import { AuthProvider } from "./context/AuthContext";
 
 
 const geistSans = Geist({
@@ -27,11 +28,13 @@ export default function RootLayout({ children }) {
 
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <ThemeProvider>
+          <AuthProvider>
           <div className="container">
             <NavBar />
             {children}
             <Footer />
           </div>
+          </AuthProvider>
         </ThemeProvider>
         <Toaster />
       </body>
