@@ -1,6 +1,6 @@
-import connect from '@/utills/db'  // Ensure path is correct
+import connect from '@/utills/db'  
 import { NextResponse } from 'next/server';
-import User from '@/model/UserSchema'; // Ensure path is correct
+import User from '@/model/UserSchema';
 import  bcrypt from 'bcrypt'
 
 

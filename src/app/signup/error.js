@@ -1,6 +1,7 @@
 'use client' // Error boundaries must be Client Components
  
 import { useEffect, useState } from 'react'
+import styles from '../page.module.css'
  
 export default function Error({ error, reset }) {
 
@@ -12,11 +13,12 @@ export default function Error({ error, reset }) {
   }, [error])
  
   return (
-    <div>
-      <h2>Something went wrong!</h2>
+    <div className={styles.errorContainer}>
+      <h2 className={styles.errorTitle}>ERROR</h2>
       <button
+          className={styles.errorButton}
+
         onClick={
-          // Attempt to recover by trying to re-render the segment
           () => reset()
         }
       >
