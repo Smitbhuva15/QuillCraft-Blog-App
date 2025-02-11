@@ -19,8 +19,17 @@
 .logout {
   padding: 5px;
   border: none;
+  background-color: #e60909;
+  color: white;
+  cursor: pointer;
+  border-radius: 3px;
+}
+.login {
+  padding: 5px;
+  border: none;
   background-color: #53c28b;
   color: white;
   cursor: pointer;
   border-radius: 3px;
+  margin-right: 10px;
 }
