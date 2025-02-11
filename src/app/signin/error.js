@@ -14,7 +14,7 @@ export default function Error({ error, reset }) {
  
   return (
     <div className={styles.errorContainer}>
-      <h2 className={styles.errorTitle}>ERROR</h2>
+      <h2 className={styles.errorTitle}> {error?.message || 'Something went wrong. Please try again.'}</h2>
       <button
           className={styles.errorButton}
 

@@ -28,14 +28,18 @@ const createInvoice=async (formData)=>{
   // const data = await res.json();
   // console.log(data.message)
   
+  //  console.log(res)
+  if(res.ok){
+    const {message}=await res.json()
 
-  if(!res.ok){
-    console.log("user not")
-    throw new Error("user not cretated")
+    redirect('/signin')
+  }
+  else{
+    const {message}=await res.json()
+  
+    throw new Error(message)
   }
 
-   return redirect('/signin')
-  
   
  
 }

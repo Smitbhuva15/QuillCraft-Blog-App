@@ -1,36 +1,62 @@
 import connect from '@/utills/db'
 import { NextResponse } from 'next/server';
 import User from '@/model/UserSchema';
-import bcrypt from 'bcrypt'
-
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
 
 export const POST = async (request) => {
     const { email, password } = await request.json();
 
     await connect();
-
     try {
+
         const isexist = await User.findOne({ email: email });
         if (!isexist) {
-            return new NextResponse({ message: "user is not exist with this email" }, { status: 401 })
+            return new NextResponse(
+                JSON.stringify({
+                    message: "User does not exist with this email"
+                }),
+                { status: 401 }
+            );
         }
- console.log(isexist)
-        const match = await bcrypt.compare(password,isexist.password);
-        console.log(match)
-        if (!match) {
-            return new NextResponse({ message: "email or password not vaild!!" }, { status: 400 })
-        }
-   
 
-        return new NextResponse({ message: "User loged In successFully!!" },
-            {user:isexist }  ,
-            { status: 200 }
+
+        const match = await bcrypt.compare(password, isexist.password);
+        if (!match) {
+            return new NextResponse(
+                JSON.stringify({
+                    message: "Invalid email or password"
+                }),
+                { status: 400 }
+            );
+        }
+
+        const usersend = await User.findOne({ email: email }, { password: 0 });
+        const token = jwt.sign(
+            {
+                id: isexist._id,
+                email: isexist.email,
+                username: isexist.username
+            }
+
+            , process.env.JWTSECRETE_PASSWORD
         );
 
+      
+
+        return new NextResponse(
+            JSON.stringify({
+                message: "User logged in successfully!",
+                user: usersend,
+                token:token
+            }),
+            { status: 200 }
+        );
     } catch (err) {
-        return new NextResponse(err.message, {
-            status: 500,
-        });
+        return new NextResponse(
+            JSON.stringify({ message: err.message }),
+            { status: 500 }
+        );
     }
 };
