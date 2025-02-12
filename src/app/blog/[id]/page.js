@@ -5,8 +5,6 @@ import Image from "next/image";
 
 
 
-
-
 async function getData(id) {
   const res = await fetch(`http://localhost:3000/api/postblog/${id}`, {
     cache: "no-store",

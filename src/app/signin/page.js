@@ -1,18 +1,26 @@
 "use client"
-import React from 'react'
+import React, { useContext } from 'react'
 import styles from './page.module.css'
 import Link from 'next/link'
 import { redirect} from "next/navigation";
 import { useRouter } from 'next/router';
 import toast, { Toaster } from 'react-hot-toast';
+import { AuthContext } from '../context/AuthContext';
 
 
+
+
+
+
+export default function Singin() {
+
+    const { setToken} = useContext(AuthContext)
+  
+  
 const createInvoice=async (e)=>{
  
   e.preventDefault();
  
-
-
   
     const email = e.target[0].value
     const password = e.target[1].value;
@@ -39,6 +47,7 @@ const createInvoice=async (e)=>{
     if (typeof window !== 'undefined') {
       localStorage.setItem("token", token);
     }
+    setToken(token)
     // console.log(message, user, token);
     toast.success(message)
      setTimeout(() => {
@@ -51,9 +60,6 @@ const createInvoice=async (e)=>{
   }
 
 }
-
-
-export default function Singin() {
 
     return (
       <div className={styles.container}>

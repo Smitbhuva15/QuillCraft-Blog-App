@@ -1,9 +1,12 @@
+"use client"
 import Link from 'next/link';
-import React from 'react'
+import React, { useContext } from 'react'
 import styles from './navbar.module.css'
 import Darkmode from '../../app/darkmode/Darkmode';
+import { AuthContext } from '@/app/context/AuthContext';
 
 export default function NavBar() {
+
 
   const links = [
     {
@@ -39,6 +42,9 @@ export default function NavBar() {
     },
   ];
 
+  const { token ,handleLogout} = useContext(AuthContext)
+
+
   return (
     <div className={styles.container}>
       <Link href="/" className={styles.logo}>
@@ -54,23 +60,36 @@ export default function NavBar() {
           </Link>
         ))}
 
-        <div>
+        {
+          token ? (
+            <button className={styles.logout} 
+            onClick={() => {
+              console.log("click");
+              handleLogout()
+            }} >
+            Logout
+          </button>
+          ) :
+            (
+              <div>
 
-        <Link href='/signin'>
-        <button className={styles.login} >
-          Sing in
-        </button>
-        </Link>
-        <Link href='/signup'>
-        <button className={styles.login} >
-          Sing up
-        </button>
-        </Link>
-        </div>
-       
-        {/* <button className={styles.logout} >
-          Logout
-        </button> */}
+                <Link href='/signin'>
+                  <button className={styles.login} >
+                    Sing in
+                  </button>
+                </Link>
+                <Link href='/signup'>
+                  <button className={styles.login} >
+                    Sing up
+                  </button>
+                </Link>
+              </div>
+            )
+        }
+
+
+
+        {/**/}
       </div>
     </div>
   )

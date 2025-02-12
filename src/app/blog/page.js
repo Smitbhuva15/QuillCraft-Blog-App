@@ -1,13 +1,16 @@
 import React from 'react'
 import styles from './page.module.css'
+import Link from 'next/link';
+import Image from 'next/image';
 
 async function getData() {
-  const res = await fetch("http://localhost:3000/api/postblog", {
+  const res = await fetch("http://localhost:3000/api/blog", {
     cache: "no-store",
   });
 
-  if (!res.ok) {
+  console.log(res)
 
+  if (!res.ok) {
     throw new Error("Failed to fetch data");
   }
 
