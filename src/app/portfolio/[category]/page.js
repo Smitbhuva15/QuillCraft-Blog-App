@@ -16,31 +16,31 @@ const getdata = (data) => {
 
 export default async function Category({ params }) {
   const cat=params.category;
-  // const data= await getdata(cat)
-  console.log(cat)
+  const data= await getdata(cat)
+  console.log(data)
 
   return (
-  //   <div >
-  //   <h1 >{params.category}</h1>
+    <div >
+    <h1 >{params.category}</h1>
 
-  //   {data.map((item) => (
-  //     <div key={item.id}>
-  //       <div >
-  //         <h1 >{item.title}</h1>
-  //         <p >{item.desc}</p>
-  //         <Button text="See More" url="#" />
-  //       </div>
-  //       <div >
-  //         <Image
+    {data.map((item) => (
+      <div key={item.id}>
+        <div >
+          <h1 >{item.title}</h1>
+          <p >{item.desc}</p>
+          <Button text="See More" url="#" />
+        </div>
+        <div >
+          <Image
            
-  //           fill={true}
-  //           src={item.image}
-  //           alt=""
-  //         />
-  //       </div>
-  //     </div>
-  //   ))}
-  // </div>
-   <div></div>
+            fill={true}
+            src={item.image}
+            alt=""
+          />
+        </div>
+      </div>
+    ))}
+  </div>
+  
   )
 }

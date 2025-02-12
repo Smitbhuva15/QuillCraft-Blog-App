@@ -38,7 +38,7 @@ export const POST = async (request) => {
      ));
    } catch (err) {
      return new NextResponse(JSON.stringify(
-      {message:"Database Error"}, { status:  500 }
+      {message:"Please sign in First!!"}, { status:  500 }
      ));
    }
  };

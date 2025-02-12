@@ -4,10 +4,16 @@ import styles from './page.module.css'
 import { AuthContext } from '../context/AuthContext'
 import useSWR, { mutate } from 'swr'
 import toast from 'react-hot-toast'
-import Image from "next/image";
+import Image from "next/image"
+import { useEffect } from "react";
+import { useRouter } from "next/router";
+
+// A custom hook to check for the token in localStorage
+
 
 
 export default function Dashboard() {
+
 
   const{userData}=useContext(AuthContext)
   
@@ -18,13 +24,7 @@ export default function Dashboard() {
    if (error) return <div>failed to load</div>
    if (isLoading) return <div>loading...</div>
    
-    console.log(data)
-  //   const res=await fetch('https://jsonplaceholder.typicode.com/posts',{
-  //     cache:'no-store'
-  //   })
-  //  const data=await res.json()
   
-  //  console.log(data)
 
   const handleDelete=async(id)=>{
      try {
@@ -61,9 +61,14 @@ export default function Dashboard() {
           username: userData.username,
         }),
       });
+      console.log(res)
       if(res.ok){
         const {message}=await res.json()
         toast.success(message)
+      }
+      else{
+        const {message}=await res.json()
+        toast.error(message)
       }
       mutate(`/api/postblog?username=${username}`);
       e.target.reset()
