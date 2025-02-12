@@ -7,6 +7,7 @@ import toast from 'react-hot-toast'
 import Image from "next/image"
 import { useEffect } from "react";
 import { useRouter } from "next/router";
+import { useAuth, useUser } from '@clerk/clerk-react'
 
 // A custom hook to check for the token in localStorage
 

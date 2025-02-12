@@ -6,7 +6,7 @@ import { redirect} from "next/navigation";
 import { useRouter } from 'next/router';
 import toast, { Toaster } from 'react-hot-toast';
 import { AuthContext } from '../context/AuthContext';
-
+import Cookies from 'js-cookie';
 
 
 
@@ -16,6 +16,9 @@ export default function Singin() {
 
     const { setToken} = useContext(AuthContext)
   
+    function setTokenCookies(token) {
+      Cookies.set('token', token, { expires: 7, path: '', secure: true, sameSite: 'Strict' });
+    }
   
 const createInvoice=async (e)=>{
  
@@ -41,12 +44,11 @@ const createInvoice=async (e)=>{
   })
   
   
-   // console.log(res)
+ 
   if (res.ok) {
     const { message, user, token } = await res.json();
-    if (typeof window !== 'undefined') {
-      localStorage.setItem("token", token);
-    }
+    
+    setTokenCookies(token)
     setToken(token)
     // console.log(message, user, token);
     toast.success(message)

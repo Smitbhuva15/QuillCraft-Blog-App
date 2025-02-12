@@ -1,11 +1,12 @@
 "use client";
+import Cookies from 'js-cookie';
 
 import { createContext, useEffect, useState } from "react";
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [token, setToken] = useState(null);  // Start with `null` instead of directly reading from localStorage.
+  const [token, setToken] = useState(Cookies.get('token'));  
   const [userData, setUserData] = useState({});
   const [loading, setLoading] = useState(false);
 
@@ -38,9 +39,7 @@ export const AuthProvider = ({ children }) => {
 
   const handleLogout = () => {
     setToken(null);
-    if (typeof window !== "undefined") {
-      localStorage.removeItem('token'); 
-    }
+   Cookies.remove('token')
   };
 
   useEffect(() => {

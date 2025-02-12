@@ -7,7 +7,6 @@ import jwt from 'jsonwebtoken';
 
 export const POST = async (request) => {
     const { email, password } = await request.json();
-
     await connect();
     try {
 

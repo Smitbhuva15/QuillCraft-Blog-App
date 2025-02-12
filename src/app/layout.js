@@ -5,6 +5,9 @@ import NavBar from "@/Components/navbar/NavBar";
 import ThemeProvider from "./context/ThemeContext";
 import toast, { Toaster } from 'react-hot-toast';
 import { AuthProvider } from "./context/AuthContext";
+import {
+  ClerkProvider
+} from '@clerk/nextjs'
 
 
 const geistSans = Geist({
@@ -28,6 +31,7 @@ export default function RootLayout({ children }) {
 
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <ThemeProvider>
+          <ClerkProvider >
           <AuthProvider>
           <div className="container">
             <NavBar />
@@ -35,6 +39,7 @@ export default function RootLayout({ children }) {
             <Footer />
           </div>
           </AuthProvider>
+          </ClerkProvider>
         </ThemeProvider>
         <Toaster />
       </body>

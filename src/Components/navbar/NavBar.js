@@ -4,6 +4,15 @@ import React, { useContext } from 'react'
 import styles from './navbar.module.css'
 import Darkmode from '../../app/darkmode/Darkmode';
 import { AuthContext } from '@/app/context/AuthContext';
+import {
+  ClerkProvider,
+  SignInButton,
+  SignUpButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+  SignOutButton
+} from '@clerk/nextjs'
 
 export default function NavBar() {
 
@@ -60,7 +69,7 @@ export default function NavBar() {
           </Link>
         ))}
 
-        {
+        {/* {
           token ? (
             <button className={styles.logout} 
             onClick={() => {
@@ -85,11 +94,17 @@ export default function NavBar() {
                 </Link>
               </div>
             )
-        }
+        } */}
+           
+           <SignedOut>
+              <SignInButton className={styles.login} />
+              <SignUpButton className={styles.login} />
+            </SignedOut>
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
 
-
-
-        {/**/}
+      
       </div>
     </div>
   )

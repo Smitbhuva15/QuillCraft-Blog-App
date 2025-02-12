@@ -2,10 +2,11 @@ import { NextResponse } from "next/server";
 import connect from "@/utills/db";
 import Post from "@/model/PostSchems";
 
-export const GET = async () => {
 
+export const GET = async () => {
+ 
   try {
-    
+   
 
     await connect();
     const posts = await Post.find();
